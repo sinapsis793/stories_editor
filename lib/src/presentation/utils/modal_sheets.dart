@@ -37,7 +37,14 @@ Future createGiphyItem(
 }
 
 /// custom exit dialog
-Future<bool> exitDialog({required context, required contentKey}) async {
+Future<bool> exitDialog({
+  required context,
+  required contentKey,
+  required String title,
+  required String descripton,
+  required String okButtonText,
+  required String cancelButtonText,
+}) async {
   return (await showDialog(
         context: context,
         barrierColor: Colors.black38,
@@ -67,10 +74,10 @@ Future<bool> exitDialog({required context, required contentKey}) async {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  const Text(
-                    'Düzenlemeleri Sil',
+                  Text(
+                    title,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
@@ -79,9 +86,9 @@ Future<bool> exitDialog({required context, required contentKey}) async {
                   const SizedBox(
                     height: 20,
                   ),
-                  const Text(
-                    "Yapılan düzenlemeler kaybedilecek.",
-                    style: TextStyle(
+                  Text(
+                    descripton,
+                    style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
                         color: Colors.white54,
@@ -101,7 +108,7 @@ Future<bool> exitDialog({required context, required contentKey}) async {
                     child: SizedBox(
                       width: 120,
                       child: Text(
-                        'Sil',
+                        okButtonText,
                         style: TextStyle(
                             fontSize: 16,
                             color: Colors.redAccent.shade200,
@@ -165,11 +172,11 @@ Future<bool> exitDialog({required context, required contentKey}) async {
                     onTap: () {
                       Navigator.of(context).pop(false);
                     },
-                    child: const SizedBox(
+                    child: SizedBox(
                       width: 120,
                       child: Text(
-                        'İptal',
-                        style: TextStyle(
+                        cancelButtonText,
+                        style: const TextStyle(
                             fontSize: 16,
                             color: Colors.white,
                             fontWeight: FontWeight.bold,

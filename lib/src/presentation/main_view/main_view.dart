@@ -60,25 +60,34 @@ class MainView extends StatefulWidget {
   /// gallery thumbnail quality
   final int? galleryThumbnailQuality;
 
+  final String title;
+  final String descripton;
+  final String okButtonText;
+  final String cancelButtonText;
+
   /// editor custom color palette list
   List<Color>? colorList;
   final String? imagePathFromWidget;
-  MainView(
-      {Key? key,
-      required this.giphyKey,
-      required this.onDone,
-      this.middleBottomWidget,
-      this.colorList,
-      this.isCustomFontList,
-      this.fontFamilyList,
-      this.gradientColors,
-      this.onBackPress,
-      this.imagePathFromWidget,
-      this.loaderWidget,
-      this.onDoneButtonStyle,
-      this.editorBackgroundColor,
-      this.galleryThumbnailQuality})
-      : super(key: key);
+  MainView({
+    Key? key,
+    required this.giphyKey,
+    required this.onDone,
+    this.middleBottomWidget,
+    this.colorList,
+    this.isCustomFontList,
+    this.fontFamilyList,
+    this.gradientColors,
+    this.onBackPress,
+    this.imagePathFromWidget,
+    this.loaderWidget,
+    this.onDoneButtonStyle,
+    this.editorBackgroundColor,
+    this.galleryThumbnailQuality,
+    required this.title,
+    required this.descripton,
+    required this.okButtonText,
+    required this.cancelButtonText,
+  }) : super(key: key);
 
   @override
   _MainViewState createState() => _MainViewState();
@@ -378,6 +387,11 @@ class _MainViewState extends State<MainView> {
                                       child: TopTools(
                                         contentKey: contentKey,
                                         context: context,
+                                        cancelButtonText:
+                                            widget.cancelButtonText,
+                                        descripton: widget.descripton,
+                                        okButtonText: widget.okButtonText,
+                                        title: widget.title,
                                       )),
                                 ),
 
@@ -506,7 +520,14 @@ class _MainViewState extends State<MainView> {
     /// show close dialog
     else if (!controlNotifier.isTextEditing && !controlNotifier.isPainting) {
       return widget.onBackPress ??
-          exitDialog(context: context, contentKey: contentKey);
+          exitDialog(
+            context: context,
+            contentKey: contentKey,
+            cancelButtonText: widget.cancelButtonText,
+            descripton: widget.descripton,
+            okButtonText: widget.okButtonText,
+            title: widget.title,
+          );
     }
     return false;
   }

@@ -46,6 +46,10 @@ class _ExampleState extends State<Example> {
                             imagePathFromWidget:
                                 "/storage/emulated/0/DCIM/Screenshots/Screenshot_20230812_181545_Instagram.jpg",
                             middleBottomWidget: const SizedBox(),
+                            title: 'Düzenlemeleri Sil',
+                            descripton: "Yapılan düzenlemeler kaybedilecek.",
+                            cancelButtonText: 'iptal',
+                            okButtonText: 'sil',
                             //isCustomFontList: true,
                             onDone: (uri) {
                               debugPrint(uri);

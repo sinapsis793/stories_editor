@@ -46,26 +46,34 @@ class StoriesEditor extends StatefulWidget {
 
   /// editor background color
   final Color? editorBackgroundColor;
+  final String title;
+  final String descripton;
+  final String okButtonText;
+  final String cancelButtonText;
 
   /// gallery thumbnail quality
   final int? galleryThumbnailQuality;
   final String? imagePathFromWidget;
-  const StoriesEditor(
-      {Key? key,
-      required this.giphyKey,
-      required this.onDone,
-      this.middleBottomWidget,
-      this.colorList,
-      this.gradientColors,
-      this.fontFamilyList,
-      this.isCustomFontList,
-      this.loaderWidget,
-      this.onBackPress,
-      this.imagePathFromWidget,
-      this.onDoneButtonStyle,
-      this.editorBackgroundColor,
-      this.galleryThumbnailQuality})
-      : super(key: key);
+  const StoriesEditor({
+    Key? key,
+    required this.giphyKey,
+    required this.onDone,
+    this.middleBottomWidget,
+    this.colorList,
+    this.gradientColors,
+    this.fontFamilyList,
+    this.isCustomFontList,
+    this.loaderWidget,
+    this.onBackPress,
+    this.imagePathFromWidget,
+    this.onDoneButtonStyle,
+    this.editorBackgroundColor,
+    this.galleryThumbnailQuality,
+    required this.title,
+    required this.descripton,
+    required this.okButtonText,
+    required this.cancelButtonText,
+  }) : super(key: key);
 
   @override
   _StoriesEditorState createState() => _StoriesEditorState();
@@ -123,6 +131,10 @@ class _StoriesEditorState extends State<StoriesEditor> {
             onBackPress: widget.onBackPress,
             editorBackgroundColor: widget.editorBackgroundColor,
             galleryThumbnailQuality: widget.galleryThumbnailQuality,
+            cancelButtonText: widget.cancelButtonText,
+            descripton: widget.descripton,
+            okButtonText: widget.okButtonText,
+            title: widget.title,
           ),
         ),
       ),
