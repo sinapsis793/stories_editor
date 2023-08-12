@@ -40,6 +40,7 @@ class MainView extends StatefulWidget {
 
   /// editor custom color gradients
   final List<List<Color>>? gradientColors;
+  final Widget? loaderWidget;
 
   /// editor custom logo
   final Widget? middleBottomWidget;
@@ -73,6 +74,7 @@ class MainView extends StatefulWidget {
       this.gradientColors,
       this.onBackPress,
       this.imagePathFromWidget,
+      this.loaderWidget,
       this.onDoneButtonStyle,
       this.editorBackgroundColor,
       this.galleryThumbnailQuality})
@@ -157,13 +159,14 @@ class _MainViewState extends State<MainView> {
   Widget build(BuildContext context) {
     final ScreenUtil screenUtil = ScreenUtil();
     return isLoading
-        ? const Material(
+        ? Material(
             color: Colors.black,
             child: SafeArea(
                 child: Center(
-                    child: CircularProgressIndicator(
-              color: Color(0xffFF562A),
-            ))),
+                    child: widget.loaderWidget ??
+                        const CircularProgressIndicator(
+                          color: Color(0xffFF562A),
+                        ))),
           )
         : WillPopScope(
             onWillPop: _popScope,

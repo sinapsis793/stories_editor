@@ -36,6 +36,7 @@ class StoriesEditor extends StatefulWidget {
 
   /// on done button Text
   final Widget? onDoneButtonStyle;
+  final Widget? loaderWidget;
 
   /// on back pressed
   final Future<bool>? onBackPress;
@@ -58,6 +59,7 @@ class StoriesEditor extends StatefulWidget {
       this.gradientColors,
       this.fontFamilyList,
       this.isCustomFontList,
+      this.loaderWidget,
       this.onBackPress,
       this.imagePathFromWidget,
       this.onDoneButtonStyle,
@@ -115,6 +117,7 @@ class _StoriesEditorState extends State<StoriesEditor> {
             middleBottomWidget: widget.middleBottomWidget,
             gradientColors: widget.gradientColors,
             colorList: widget.colorList,
+            loaderWidget: widget.loaderWidget,
             imagePathFromWidget: widget.imagePathFromWidget,
             onDoneButtonStyle: widget.onDoneButtonStyle,
             onBackPress: widget.onBackPress,
