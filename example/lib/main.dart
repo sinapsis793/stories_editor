@@ -50,6 +50,9 @@ class _ExampleState extends State<Example> {
                             descripton: "Yapılan düzenlemeler kaybedilecek.",
                             cancelButtonText: 'iptal',
                             okButtonText: 'sil',
+                            tapToTypeText: "Yazmak için tıkla",
+                            okButtonFortText: 'tamam',
+
                             //isCustomFontList: true,
                             onDone: (uri) {
                               debugPrint(uri);

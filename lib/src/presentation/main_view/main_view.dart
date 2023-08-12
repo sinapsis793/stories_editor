@@ -64,6 +64,8 @@ class MainView extends StatefulWidget {
   final String descripton;
   final String okButtonText;
   final String cancelButtonText;
+  final String tapToTypeText;
+  final String okButtonFortText;
 
   /// editor custom color palette list
   List<Color>? colorList;
@@ -87,6 +89,8 @@ class MainView extends StatefulWidget {
     required this.descripton,
     required this.okButtonText,
     required this.cancelButtonText,
+    required this.tapToTypeText,
+    required this.okButtonFortText,
   }) : super(key: key);
 
   @override
@@ -359,7 +363,7 @@ class _MainViewState extends State<MainView> {
                                     ignoring: true,
                                     child: Align(
                                       alignment: const Alignment(0, -0.1),
-                                      child: Text('Yazmak için tıkla',
+                                      child: Text(widget.tapToTypeText,
                                           style: TextStyle(
                                               fontFamily: 'Alegreya',
                                               package: 'stories_editor',
@@ -407,6 +411,7 @@ class _MainViewState extends State<MainView> {
                                 Visibility(
                                   visible: controlNotifier.isTextEditing,
                                   child: TextEditor(
+                                    okButtonFortText: widget.okButtonFortText,
                                     context: context,
                                   ),
                                 ),

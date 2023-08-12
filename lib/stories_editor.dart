@@ -50,6 +50,8 @@ class StoriesEditor extends StatefulWidget {
   final String descripton;
   final String okButtonText;
   final String cancelButtonText;
+  final String tapToTypeText;
+  final String okButtonFortText;
 
   /// gallery thumbnail quality
   final int? galleryThumbnailQuality;
@@ -73,6 +75,8 @@ class StoriesEditor extends StatefulWidget {
     required this.descripton,
     required this.okButtonText,
     required this.cancelButtonText,
+    required this.tapToTypeText,
+    required this.okButtonFortText,
   }) : super(key: key);
 
   @override
@@ -107,7 +111,8 @@ class _StoriesEditorState extends State<StoriesEditor> {
         return false;
       },
       child: ScreenUtilInit(
-        designSize: const Size(1080, 1920),
+        designSize: Size(MediaQuery.of(context).size.width * 3,
+            MediaQuery.of(context).size.height * 2),
         builder: (_, __) => MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (_) => ControlNotifier()),
@@ -119,6 +124,8 @@ class _StoriesEditorState extends State<StoriesEditor> {
           ],
           child: MainView(
             giphyKey: widget.giphyKey,
+            okButtonFortText: widget.okButtonFortText,
+            tapToTypeText: widget.tapToTypeText,
             onDone: widget.onDone,
             fontFamilyList: widget.fontFamilyList,
             isCustomFontList: widget.isCustomFontList,
