@@ -63,9 +63,12 @@ class _TextEditorState extends State<TextEditor> {
                         ),
 
                         /// text size
-                        const Align(
-                          alignment: Alignment.centerLeft,
-                          child: SizeSliderWidget(),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 20.0),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: SizeSliderWidget(),
+                          ),
                         ),
 
                         /// top tools
@@ -80,7 +83,9 @@ class _TextEditorState extends State<TextEditor> {
 
                         /// font family selector (bottom)
                         Positioned(
-                          bottom: screenUtil.screenHeight * 0.21,
+                          bottom: MediaQuery.of(context).viewInsets.bottom == 0
+                              ? screenUtil.screenHeight * 0.450
+                              : screenUtil.screenHeight * 0.30,
                           child: Visibility(
                             visible: editorNotifier.isFontFamily &&
                                 !editorNotifier.isTextAnimation,
@@ -96,7 +101,7 @@ class _TextEditorState extends State<TextEditor> {
 
                         /// font color selector (bottom)
                         Positioned(
-                          bottom: screenUtil.screenHeight * 0.21,
+                          bottom: screenUtil.screenHeight * 0.20,
                           child: Visibility(
                               visible: !editorNotifier.isFontFamily &&
                                   !editorNotifier.isTextAnimation,

@@ -21,11 +21,9 @@ class StoriesEditor extends StatefulWidget {
 
   /// editor custom font families package
   final bool? isCustomFontList;
-  final String? imagePathFromWidget;
 
   /// giphy api key
   final String giphyKey;
-  final bool isFirstPick;
 
   /// editor custom color gradients
   final List<List<Color>>? gradientColors;
@@ -50,7 +48,7 @@ class StoriesEditor extends StatefulWidget {
 
   /// gallery thumbnail quality
   final int? galleryThumbnailQuality;
-
+  final String? imagePathFromWidget;
   const StoriesEditor(
       {Key? key,
       required this.giphyKey,
@@ -64,7 +62,6 @@ class StoriesEditor extends StatefulWidget {
       this.imagePathFromWidget,
       this.onDoneButtonStyle,
       this.editorBackgroundColor,
-      this.isFirstPick = false,
       this.galleryThumbnailQuality})
       : super(key: key);
 
@@ -75,7 +72,6 @@ class StoriesEditor extends StatefulWidget {
 class _StoriesEditorState extends State<StoriesEditor> {
   @override
   void initState() {
-    print("Stories_editor : ${widget.imagePathFromWidget}");
     Paint.enableDithering = true;
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations(
@@ -112,7 +108,6 @@ class _StoriesEditorState extends State<StoriesEditor> {
             ChangeNotifierProvider(create: (_) => TextEditingNotifier()),
           ],
           child: MainView(
-            imagePathFromWidget: widget.imagePathFromWidget,
             giphyKey: widget.giphyKey,
             onDone: widget.onDone,
             fontFamilyList: widget.fontFamilyList,
@@ -120,7 +115,7 @@ class _StoriesEditorState extends State<StoriesEditor> {
             middleBottomWidget: widget.middleBottomWidget,
             gradientColors: widget.gradientColors,
             colorList: widget.colorList,
-            isFirstPick: widget.isFirstPick,
+            imagePathFromWidget: widget.imagePathFromWidget,
             onDoneButtonStyle: widget.onDoneButtonStyle,
             onBackPress: widget.onBackPress,
             editorBackgroundColor: widget.editorBackgroundColor,

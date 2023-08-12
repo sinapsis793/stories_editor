@@ -37,8 +37,12 @@ class _ScrollablePageViewState extends State<ScrollablePageView> {
 
   @override
   void dispose() {
-    _pageController!.dispose();
-    _listScrollController!.dispose();
+    if (_pageController != null && _pageController!.hasClients) {
+      _pageController!.dispose();
+    }
+    if (_listScrollController != null && _listScrollController!.hasClients) {
+      _listScrollController!.dispose();
+    }
     super.dispose();
   }
 

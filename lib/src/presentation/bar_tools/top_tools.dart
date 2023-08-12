@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/control_provider.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/draggable_widget_notifier.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/painting_notifier.dart';
-import 'package:stories_editor/src/domain/sevices/save_as_image.dart';
 import 'package:stories_editor/src/presentation/utils/modal_sheets.dart';
 import 'package:stories_editor/src/presentation/widgets/animated_onTap_button.dart';
 import 'package:stories_editor/src/presentation/widgets/tool_button.dart';
@@ -64,38 +62,38 @@ class _TopToolsState extends State<TopTools> {
                           });
                         }
                       }),
-                ToolButton(
-                    child: const ImageIcon(
-                      AssetImage('assets/icons/download.png',
-                          package: 'stories_editor'),
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                    backGroundColor: Colors.black12,
-                    onTap: () async {
-                      if (paintingNotifier.lines.isNotEmpty ||
-                          itemNotifier.draggableWidget.isNotEmpty) {
-                        var response = await takePicture(
-                            contentKey: widget.contentKey,
-                            context: context,
-                            saveToGallery: true);
-                        if (response) {
-                          Fluttertoast.showToast(msg: 'Successfully saved');
-                        } else {
-                          Fluttertoast.showToast(msg: 'Error');
-                        }
-                      }
-                    }),
-                ToolButton(
-                    child: const ImageIcon(
-                      AssetImage('assets/icons/stickers.png',
-                          package: 'stories_editor'),
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                    backGroundColor: Colors.black12,
-                    onTap: () => createGiphyItem(
-                        context: context, giphyKey: controlNotifier.giphyKey)),
+                // ToolButton(
+                //     child: const ImageIcon(
+                //       AssetImage('assets/icons/download.png',
+                //           package: 'stories_editor'),
+                //       color: Colors.white,
+                //       size: 20,
+                //     ),
+                //     backGroundColor: Colors.black12,
+                //     onTap: () async {
+                //       if (paintingNotifier.lines.isNotEmpty ||
+                //           itemNotifier.draggableWidget.isNotEmpty) {
+                //         var response = await takePicture(
+                //             contentKey: widget.contentKey,
+                //             context: context,
+                //             saveToGallery: true);
+                //         if (response) {
+                //           Fluttertoast.showToast(msg: 'Successfully saved');
+                //         } else {
+                //           Fluttertoast.showToast(msg: 'Error');
+                //         }
+                //       }
+                //     }),
+                //   ToolButton(
+                //       child: const ImageIcon(
+                //         AssetImage('assets/icons/stickers.png',
+                //             package: 'stories_editor'),
+                //         color: Colors.white,
+                //         size: 20,
+                //       ),
+                //       backGroundColor: Colors.black12,
+                //       onTap: () => createGiphyItem(
+                //           context: context, giphyKey: controlNotifier.giphyKey)),
                 ToolButton(
                     child: const ImageIcon(
                       AssetImage('assets/icons/draw.png',

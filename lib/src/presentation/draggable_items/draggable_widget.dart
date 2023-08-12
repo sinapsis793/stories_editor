@@ -21,7 +21,6 @@ class DraggableWidget extends StatelessWidget {
   final Function(PointerUpEvent)? onPointerUp;
   final Function(PointerMoveEvent)? onPointerMove;
   final BuildContext context;
-  final String? imagePath;
   const DraggableWidget({
     Key? key,
     required this.context,
@@ -29,7 +28,6 @@ class DraggableWidget extends StatelessWidget {
     this.onPointerDown,
     this.onPointerUp,
     this.onPointerMove,
-    this.imagePath,
   }) : super(key: key);
 
   @override
@@ -99,9 +97,7 @@ class DraggableWidget extends StatelessWidget {
           overlayWidget = SizedBox(
             width: screenUtil.screenWidth - 144.w,
             child: FileImageBG(
-              filePath: File(imagePath == null
-                  ? _controlProvider.mediaPath
-                  : imagePath ?? ""),
+              filePath: File(_controlProvider.mediaPath),
               generatedGradient: (color1, color2) {
                 _colorProvider.color1 = color1;
                 _colorProvider.color2 = color2;

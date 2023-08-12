@@ -152,7 +152,7 @@ class BottomTools extends StatelessWidget {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Text(
-                                        'Share',
+                                        'Paylaş',
                                         style: TextStyle(
                                             color: Colors.white,
                                             letterSpacing: 1.5,

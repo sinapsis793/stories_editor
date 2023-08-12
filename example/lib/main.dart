@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:stories_editor/stories_editor.dart';
 
 void main() {
@@ -46,10 +45,10 @@ class _ExampleState extends State<Example> {
                             galleryThumbnailQuality: 300,
                             imagePathFromWidget:
                                 "/storage/emulated/0/DCIM/Screenshots/Screenshot_20230812_181545_Instagram.jpg",
+                            middleBottomWidget: const SizedBox(),
                             //isCustomFontList: true,
                             onDone: (uri) {
                               debugPrint(uri);
-                              Share.shareFiles([uri]);
                             },
                           )));
             },
