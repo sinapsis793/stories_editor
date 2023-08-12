@@ -39,6 +39,7 @@ class MainView extends StatefulWidget {
   final String giphyKey;
 
   final String? imagePathFromWidget;
+  final bool isFirstPick;
 
   /// editor custom color gradients
   final List<List<Color>>? gradientColors;
@@ -74,6 +75,7 @@ class MainView extends StatefulWidget {
       this.gradientColors,
       this.onBackPress,
       this.onDoneButtonStyle,
+      this.isFirstPick = false,
       this.editorBackgroundColor,
       this.imagePathFromWidget,
       this.galleryThumbnailQuality})
@@ -131,38 +133,40 @@ class _MainViewState extends State<MainView> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (mounted) {
-      SchedulerBinding.instance.addPostFrameCallback((_) async {
-        await Future.delayed(const Duration(seconds: 2));
-        var _control = Provider.of<ControlNotifier>(context, listen: false);
+    if (widget.isFirstPick) {
+      if (mounted) {
+        SchedulerBinding.instance.addPostFrameCallback((_) async {
+          await Future.delayed(const Duration(seconds: 2));
+          var _control = Provider.of<ControlNotifier>(context, listen: false);
 
-        _control.mediaPath = widget.imagePathFromWidget ?? "";
-        print("main_view : ${widget.imagePathFromWidget}");
-        print("Stories_editor : ${_control.mediaPath.toString()}");
-        TextEditingNotifier editorNotifier =
-            Provider.of<TextEditingNotifier>(context, listen: false);
-        ControlNotifier controlNotifier =
-            Provider.of<ControlNotifier>(context, listen: false);
-        final _editableItemNotifier =
-            Provider.of<DraggableWidgetNotifier>(context, listen: false);
+          _control.mediaPath = widget.imagePathFromWidget ?? "";
+          print("main_view : ${widget.imagePathFromWidget}");
+          print("Stories_editor : ${_control.mediaPath.toString()}");
+          TextEditingNotifier editorNotifier =
+              Provider.of<TextEditingNotifier>(context, listen: false);
+          ControlNotifier controlNotifier =
+              Provider.of<ControlNotifier>(context, listen: false);
+          final _editableItemNotifier =
+              Provider.of<DraggableWidgetNotifier>(context, listen: false);
 
-        /// create Text Item
-        _editableItemNotifier.draggableWidget.add(EditableItem()
-          ..type = ItemType.image
-          ..text = editorNotifier.text.trim()
-          ..backGroundColor = editorNotifier.backGroundColor
-          ..textColor = controlNotifier.colorList![editorNotifier.textColor]
-          ..fontFamily = editorNotifier.fontFamilyIndex
-          ..fontSize = editorNotifier.textSize
-          ..fontAnimationIndex = editorNotifier.fontAnimationIndex
-          ..textAlign = editorNotifier.textAlign
-          ..textList = editorNotifier.textList
-          ..animationType =
-              editorNotifier.animationList[editorNotifier.fontAnimationIndex]
-          ..position = const Offset(0.0, 0.0));
-        editorNotifier.setDefaults();
-        controlNotifier.isTextEditing = controlNotifier.isTextEditing;
-      });
+          /// create Text Item
+          _editableItemNotifier.draggableWidget.add(EditableItem()
+            ..type = ItemType.image
+            ..text = editorNotifier.text.trim()
+            ..backGroundColor = editorNotifier.backGroundColor
+            ..textColor = controlNotifier.colorList![editorNotifier.textColor]
+            ..fontFamily = editorNotifier.fontFamilyIndex
+            ..fontSize = editorNotifier.textSize
+            ..fontAnimationIndex = editorNotifier.fontAnimationIndex
+            ..textAlign = editorNotifier.textAlign
+            ..textList = editorNotifier.textList
+            ..animationType =
+                editorNotifier.animationList[editorNotifier.fontAnimationIndex]
+            ..position = const Offset(0.0, 0.0));
+          editorNotifier.setDefaults();
+          controlNotifier.isTextEditing = controlNotifier.isTextEditing;
+        });
+      }
     }
   }
 

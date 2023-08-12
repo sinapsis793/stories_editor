@@ -25,6 +25,7 @@ class StoriesEditor extends StatefulWidget {
 
   /// giphy api key
   final String giphyKey;
+  final bool isFirstPick;
 
   /// editor custom color gradients
   final List<List<Color>>? gradientColors;
@@ -63,6 +64,7 @@ class StoriesEditor extends StatefulWidget {
       this.imagePathFromWidget,
       this.onDoneButtonStyle,
       this.editorBackgroundColor,
+      this.isFirstPick = false,
       this.galleryThumbnailQuality})
       : super(key: key);
 
@@ -118,6 +120,7 @@ class _StoriesEditorState extends State<StoriesEditor> {
             middleBottomWidget: widget.middleBottomWidget,
             gradientColors: widget.gradientColors,
             colorList: widget.colorList,
+            isFirstPick: widget.isFirstPick,
             onDoneButtonStyle: widget.onDoneButtonStyle,
             onBackPress: widget.onBackPress,
             editorBackgroundColor: widget.editorBackgroundColor,
