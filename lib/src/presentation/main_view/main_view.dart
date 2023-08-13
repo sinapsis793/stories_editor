@@ -67,6 +67,7 @@ class MainView extends StatefulWidget {
   final String cancelButtonText;
   final String tapToTypeText;
   final String okButtonFortText;
+  final String shareButtonText;
 
   /// editor custom color palette list
   List<Color>? colorList;
@@ -92,6 +93,7 @@ class MainView extends StatefulWidget {
     required this.cancelButtonText,
     required this.tapToTypeText,
     required this.okButtonFortText,
+    required this.shareButtonText,
   }) : super(key: key);
 
   @override
@@ -153,7 +155,12 @@ class _MainViewState extends State<MainView> {
       var _control = Provider.of<ControlNotifier>(context, listen: false);
 
       _control.mediaPath = widget.imagePathFromWidget ?? "";
-
+      if (widget.gradientColors != null) {
+        _control.gradientColors = widget.gradientColors;
+      }
+      if (widget.colorList != null) {
+        _control.colorList = widget.colorList;
+      }
       final _editableItemNotifier =
           Provider.of<DraggableWidgetNotifier>(context, listen: false);
 
@@ -185,9 +192,6 @@ class _MainViewState extends State<MainView> {
         : WillPopScope(
             onWillPop: _popScope,
             child: Material(
-              color: widget.editorBackgroundColor == Colors.transparent
-                  ? Colors.black
-                  : widget.editorBackgroundColor ?? Colors.black,
               child: Consumer6<
                   ControlNotifier,
                   DraggableWidgetNotifier,
@@ -431,6 +435,7 @@ class _MainViewState extends State<MainView> {
                                     padding: EdgeInsets.only(
                                         top: screenUtil.screenHeight / 1.2),
                                     child: BottomTools(
+                                      shareButtonText: widget.shareButtonText,
                                       contentKey: contentKey,
                                       onDone: (bytes) {
                                         setState(() {

@@ -12,6 +12,7 @@ class BottomTools extends StatelessWidget {
   final GlobalKey contentKey;
   final Function(String imageUri) onDone;
   final Widget? onDoneButtonStyle;
+  final String shareButtonText;
 
   /// editor background color
   final Color? editorBackgroundColor;
@@ -19,6 +20,7 @@ class BottomTools extends StatelessWidget {
       {Key? key,
       required this.contentKey,
       required this.onDone,
+      required this.shareButtonText,
       this.onDoneButtonStyle,
       this.editorBackgroundColor})
       : super(key: key);
@@ -148,18 +150,18 @@ class BottomTools extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(15),
                                     border: Border.all(
                                         color: Colors.white, width: 1.5)),
-                                child: const Row(
+                                child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Text(
-                                        'Paylaş',
-                                        style: TextStyle(
+                                        shareButtonText,
+                                        style: const TextStyle(
                                             color: Colors.white,
                                             letterSpacing: 1.5,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400),
                                       ),
-                                      Padding(
+                                      const Padding(
                                         padding: EdgeInsets.only(left: 5),
                                         child: Icon(
                                           Icons.arrow_forward_ios,

@@ -52,32 +52,34 @@ class StoriesEditor extends StatefulWidget {
   final String cancelButtonText;
   final String tapToTypeText;
   final String okButtonFortText;
+  final String shareButtonText;
 
   /// gallery thumbnail quality
   final int? galleryThumbnailQuality;
   final String? imagePathFromWidget;
-  const StoriesEditor({
-    Key? key,
-    required this.giphyKey,
-    required this.onDone,
-    this.middleBottomWidget,
-    this.colorList,
-    this.gradientColors,
-    this.fontFamilyList,
-    this.isCustomFontList,
-    this.loaderWidget,
-    this.onBackPress,
-    this.imagePathFromWidget,
-    this.onDoneButtonStyle,
-    this.editorBackgroundColor,
-    this.galleryThumbnailQuality,
-    required this.title,
-    required this.descripton,
-    required this.okButtonText,
-    required this.cancelButtonText,
-    required this.tapToTypeText,
-    required this.okButtonFortText,
-  }) : super(key: key);
+  const StoriesEditor(
+      {Key? key,
+      required this.giphyKey,
+      required this.onDone,
+      this.middleBottomWidget,
+      this.colorList,
+      this.gradientColors,
+      this.fontFamilyList,
+      this.isCustomFontList,
+      this.loaderWidget,
+      this.onBackPress,
+      this.imagePathFromWidget,
+      this.onDoneButtonStyle,
+      this.editorBackgroundColor,
+      this.galleryThumbnailQuality,
+      required this.title,
+      required this.descripton,
+      required this.okButtonText,
+      required this.cancelButtonText,
+      required this.tapToTypeText,
+      required this.okButtonFortText,
+      required this.shareButtonText})
+      : super(key: key);
 
   @override
   _StoriesEditorState createState() => _StoriesEditorState();
@@ -105,43 +107,47 @@ class _StoriesEditorState extends State<StoriesEditor> {
 
   @override
   Widget build(BuildContext context) {
-    return NotificationListener<OverscrollIndicatorNotification>(
-      onNotification: (overscroll) {
-        overscroll.disallowIndicator();
-        return false;
-      },
-      child: ScreenUtilInit(
-        designSize: Size(MediaQuery.of(context).size.width * 3,
-            MediaQuery.of(context).size.height * 2),
-        builder: (_, __) => MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (_) => ControlNotifier()),
-            ChangeNotifierProvider(create: (_) => ScrollNotifier()),
-            ChangeNotifierProvider(create: (_) => DraggableWidgetNotifier()),
-            ChangeNotifierProvider(create: (_) => GradientNotifier()),
-            ChangeNotifierProvider(create: (_) => PaintingNotifier()),
-            ChangeNotifierProvider(create: (_) => TextEditingNotifier()),
-          ],
-          child: MainView(
-            giphyKey: widget.giphyKey,
-            okButtonFortText: widget.okButtonFortText,
-            tapToTypeText: widget.tapToTypeText,
-            onDone: widget.onDone,
-            fontFamilyList: widget.fontFamilyList,
-            isCustomFontList: widget.isCustomFontList,
-            middleBottomWidget: widget.middleBottomWidget,
-            gradientColors: widget.gradientColors,
-            colorList: widget.colorList,
-            loaderWidget: widget.loaderWidget,
-            imagePathFromWidget: widget.imagePathFromWidget,
-            onDoneButtonStyle: widget.onDoneButtonStyle,
-            onBackPress: widget.onBackPress,
-            editorBackgroundColor: widget.editorBackgroundColor,
-            galleryThumbnailQuality: widget.galleryThumbnailQuality,
-            cancelButtonText: widget.cancelButtonText,
-            descripton: widget.descripton,
-            okButtonText: widget.okButtonText,
-            title: widget.title,
+    return Container(
+      color: Colors.blue,
+      child: NotificationListener<OverscrollIndicatorNotification>(
+        onNotification: (overscroll) {
+          overscroll.disallowIndicator();
+          return false;
+        },
+        child: ScreenUtilInit(
+          designSize: Size(MediaQuery.of(context).size.width * 3,
+              MediaQuery.of(context).size.height * 2),
+          builder: (_, __) => MultiProvider(
+            providers: [
+              ChangeNotifierProvider(create: (_) => ControlNotifier()),
+              ChangeNotifierProvider(create: (_) => ScrollNotifier()),
+              ChangeNotifierProvider(create: (_) => DraggableWidgetNotifier()),
+              ChangeNotifierProvider(create: (_) => GradientNotifier()),
+              ChangeNotifierProvider(create: (_) => PaintingNotifier()),
+              ChangeNotifierProvider(create: (_) => TextEditingNotifier()),
+            ],
+            child: MainView(
+              shareButtonText: widget.shareButtonText,
+              giphyKey: widget.giphyKey,
+              okButtonFortText: widget.okButtonFortText,
+              tapToTypeText: widget.tapToTypeText,
+              onDone: widget.onDone,
+              fontFamilyList: widget.fontFamilyList,
+              isCustomFontList: widget.isCustomFontList,
+              middleBottomWidget: widget.middleBottomWidget,
+              gradientColors: widget.gradientColors,
+              colorList: widget.colorList,
+              loaderWidget: widget.loaderWidget,
+              imagePathFromWidget: widget.imagePathFromWidget,
+              onDoneButtonStyle: widget.onDoneButtonStyle,
+              onBackPress: widget.onBackPress,
+              editorBackgroundColor: widget.editorBackgroundColor,
+              galleryThumbnailQuality: widget.galleryThumbnailQuality,
+              cancelButtonText: widget.cancelButtonText,
+              descripton: widget.descripton,
+              okButtonText: widget.okButtonText,
+              title: widget.title,
+            ),
           ),
         ),
       ),

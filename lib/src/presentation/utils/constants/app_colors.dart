@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:stories_editor/src/presentation/utils/Extensions/hexColor.dart';
 
 class AppColors {
   static const defaultColors = [
@@ -42,26 +41,6 @@ class AppColors {
     [
       const Color.fromRGBO(255, 255, 255, 1),
       const Color.fromRGBO(234, 236, 255, 1)
-    ],
-    [HexColor.fromHex('#2AA8F2'), HexColor.fromHex('#A800FF')],
-    [HexColor.fromHex('#A800FF'), HexColor.fromHex('#2AA8F2')],
-    [HexColor.fromHex('#A800FF'), HexColor.fromHex('#FF0900')],
-    [
-      HexColor.fromHex('#33CD11'),
-      HexColor.fromHex('#33CD75'),
-      HexColor.fromHex('#0099FF')
-    ],
-    [HexColor.fromHex('#FF0043'), HexColor.fromHex('#FFAA20')],
-    [HexColor.fromHex('#9911AA'), HexColor.fromHex('#FF0013')],
-    [HexColor.fromHex('#323232'), HexColor.fromHex('#354047')],
-    [HexColor.fromHex('#A9AAAE'), HexColor.fromHex('#C8CACA')],
-    [
-      HexColor.fromHex('#FF0033'),
-      HexColor.fromHex('#FF8800'),
-      HexColor.fromHex('#FFAA00'),
-      HexColor.fromHex('#009508'),
-      HexColor.fromHex('#0078FF'),
-      HexColor.fromHex('#8001AA')
     ],
     [const Color(0xFFee9ca7), const Color(0xFFffdde1)],
     [const Color(0xFF2193b0), const Color(0xFF6dd5ed)],

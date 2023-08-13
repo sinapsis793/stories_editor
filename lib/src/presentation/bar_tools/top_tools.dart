@@ -8,6 +8,8 @@ import 'package:stories_editor/src/presentation/utils/modal_sheets.dart';
 import 'package:stories_editor/src/presentation/widgets/animated_onTap_button.dart';
 import 'package:stories_editor/src/presentation/widgets/tool_button.dart';
 
+import '../../domain/providers/notifiers/gradient_notifier.dart';
+
 class TopTools extends StatefulWidget {
   final GlobalKey contentKey;
   final BuildContext context;
@@ -64,21 +66,30 @@ class _TopToolsState extends State<TopTools> {
                         Navigator.pop(context);
                       }
                     }),
-                if (controlNotifier.mediaPath.isEmpty)
-                  _selectColor(
-                      controlProvider: controlNotifier,
-                      onTap: () {
-                        if (controlNotifier.gradientIndex >=
-                            controlNotifier.gradientColors!.length - 1) {
-                          setState(() {
-                            controlNotifier.gradientIndex = 0;
-                          });
-                        } else {
-                          setState(() {
-                            controlNotifier.gradientIndex += 1;
-                          });
-                        }
-                      }),
+
+                _selectColor(
+                    controlProvider: controlNotifier,
+                    onTap: () {
+                      var _colorProvider = Provider.of<GradientNotifier>(
+                          this.context,
+                          listen: false);
+
+                      if (controlNotifier.gradientIndex >=
+                          controlNotifier.gradientColors!.length - 1) {
+                        setState(() {
+                          controlNotifier.gradientIndex = 0;
+                        });
+                      } else {
+                        setState(() {
+                          controlNotifier.gradientIndex += 1;
+                        });
+                      }
+
+                      _colorProvider.color2 = controlNotifier
+                          .gradientColors![controlNotifier.gradientIndex][1];
+                      _colorProvider.color1 = controlNotifier
+                          .gradientColors![controlNotifier.gradientIndex][0];
+                    }),
                 // ToolButton(
                 //     child: const ImageIcon(
                 //       AssetImage('assets/icons/download.png',

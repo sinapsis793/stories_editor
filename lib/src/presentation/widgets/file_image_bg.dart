@@ -1,9 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'dart:async';
 
 import 'package:stories_editor/src/presentation/utils/color_detection.dart';
+
+import '../../domain/providers/notifiers/control_provider.dart';
 
 class FileImageBG extends StatefulWidget {
   final File? filePath;
@@ -36,24 +39,27 @@ class _FileImageBGState extends State<FileImageBG> {
     Timer.periodic(const Duration(milliseconds: 500), (callback) async {
       if (imageKey.currentState?.context.size?.height == 0.0) {
       } else {
-        var cd1 = await ColorDetection(
-          currentKey: currentKey,
-          paintKey: paintKey,
-          stateController: stateController,
-        ).searchPixel(
-            Offset(imageKey.currentState!.context.size!.width / 2, 480));
-        var cd12 = await ColorDetection(
-          currentKey: currentKey,
-          paintKey: paintKey,
-          stateController: stateController,
-        ).searchPixel(
-            Offset(imageKey.currentState!.context.size!.width / 2.03, 530));
-        color1 = cd1;
-        color2 = cd12;
-        setState(() {});
-        widget.generatedGradient(color1, color2);
-        callback.cancel();
-        stateController.close();
+        if (imageKey.currentState != null &&
+            imageKey.currentState?.context.size != null) {
+          var cd1 = await ColorDetection(
+            currentKey: currentKey,
+            paintKey: paintKey,
+            stateController: stateController,
+          ).searchPixel(
+              Offset(imageKey.currentState!.context.size!.width / 2, 480));
+          var cd12 = await ColorDetection(
+            currentKey: currentKey,
+            paintKey: paintKey,
+            stateController: stateController,
+          ).searchPixel(
+              Offset(imageKey.currentState!.context.size!.width / 2.03, 530));
+          color1 = cd1;
+          color2 = cd12;
+          setState(() {});
+          widget.generatedGradient(color1, color2);
+          callback.cancel();
+          stateController.close();
+        }
       }
     });
     super.initState();
@@ -64,21 +70,29 @@ class _FileImageBGState extends State<FileImageBG> {
     final ScreenUtil screenUtil = ScreenUtil();
     return SizedBox(
         height: screenUtil.screenHeight,
-        width: screenUtil.screenWidth,
+        width: double.infinity,
         child: RepaintBoundary(
             key: paintKey,
             child: Container(
-              color: Colors.blue,
-              child: Center(
-                  child: AspectRatio(
-                aspectRatio: 9 / 18.2,
-                child: Image.file(
-                  widget.filePath!,
-                  fit: BoxFit.fill,
-                  key: imageKey,
-                  filterQuality: FilterQuality.high,
+              key: imageKey,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: Provider.of<ControlNotifier>(this.context,
+                              listen: false)
+                          .gradientColors![
+                      Provider.of<ControlNotifier>(this.context, listen: false)
+                          .gradientIndex],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
                 ),
-              )),
+                image: DecorationImage(
+                  filterQuality: FilterQuality.high,
+                  fit: BoxFit.cover,
+                  image: FileImage(
+                    widget.filePath!,
+                  ),
+                ),
+              ),
             )));
   }
 }

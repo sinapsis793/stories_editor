@@ -31,7 +31,6 @@ class _ExampleState extends State<Example> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black,
         resizeToAvoidBottomInset: false,
         body: Center(
           child: ElevatedButton(
@@ -52,6 +51,7 @@ class _ExampleState extends State<Example> {
                             okButtonText: 'sil',
                             tapToTypeText: "Yazmak için tıkla",
                             okButtonFortText: 'tamam',
+                            shareButtonText: 'paylaş',
 
                             //isCustomFontList: true,
                             onDone: (uri) {
