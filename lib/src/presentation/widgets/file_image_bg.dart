@@ -24,12 +24,17 @@ class _FileImageBGState extends State<FileImageBG> {
   final StreamController<Color> stateController = StreamController<Color>();
   Color color1 = const Color(0xFFFFFFFF);
   Color color2 = const Color(0xFFFFFFFF);
+  @override
+  void dispose() {
+    stateController.close();
+    super.dispose();
+  }
 
   @override
   void initState() {
     currentKey = paintKey;
     Timer.periodic(const Duration(milliseconds: 500), (callback) async {
-      if (imageKey.currentState!.context.size!.height == 0.0) {
+      if (imageKey.currentState?.context.size?.height == 0.0) {
       } else {
         var cd1 = await ColorDetection(
           currentKey: currentKey,
@@ -62,11 +67,18 @@ class _FileImageBGState extends State<FileImageBG> {
         width: screenUtil.screenWidth,
         child: RepaintBoundary(
             key: paintKey,
-            child: Center(
+            child: Container(
+              color: Colors.blue,
+              child: Center(
+                  child: AspectRatio(
+                aspectRatio: 9 / 18.2,
                 child: Image.file(
-              File(widget.filePath!.path),
-              key: imageKey,
-              filterQuality: FilterQuality.high,
-            ))));
+                  widget.filePath!,
+                  fit: BoxFit.fill,
+                  key: imageKey,
+                  filterQuality: FilterQuality.high,
+                ),
+              )),
+            )));
   }
 }

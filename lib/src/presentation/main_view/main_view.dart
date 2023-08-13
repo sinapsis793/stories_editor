@@ -16,7 +16,6 @@ import 'package:stories_editor/src/domain/providers/notifiers/gradient_notifier.
 import 'package:stories_editor/src/domain/providers/notifiers/painting_notifier.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/scroll_notifier.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/text_editing_notifier.dart';
-import 'package:stories_editor/src/presentation/bar_tools/bottom_tools.dart';
 import 'package:stories_editor/src/presentation/bar_tools/top_tools.dart';
 import 'package:stories_editor/src/presentation/draggable_items/delete_item.dart';
 import 'package:stories_editor/src/presentation/draggable_items/draggable_widget.dart';
@@ -27,6 +26,8 @@ import 'package:stories_editor/src/presentation/utils/constants/app_enums.dart';
 import 'package:stories_editor/src/presentation/utils/modal_sheets.dart';
 import 'package:stories_editor/src/presentation/widgets/animated_onTap_button.dart';
 import 'package:stories_editor/src/presentation/widgets/scrollable_pageView.dart';
+
+import '../bar_tools/bottom_tools.dart';
 
 class MainView extends StatefulWidget {
   /// editor custom font families
@@ -230,7 +231,7 @@ class _MainViewState extends State<MainView> {
                                   child: Align(
                                     alignment: Alignment.topCenter,
                                     child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(25),
+                                      borderRadius: BorderRadius.circular(5),
                                       child: SizedBox(
                                         width: screenUtil.screenWidth,
                                         child: RepaintBoundary(
@@ -421,24 +422,30 @@ class _MainViewState extends State<MainView> {
                                   visible: controlNotifier.isPainting,
                                   child: const Painting(),
                                 ),
+
+                                /// bottom tools
+                                if (!kIsWeb &&
+                                    MediaQuery.of(context).viewInsets.bottom ==
+                                        0)
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: screenUtil.screenHeight / 1.2),
+                                    child: BottomTools(
+                                      contentKey: contentKey,
+                                      onDone: (bytes) {
+                                        setState(() {
+                                          widget.onDone!(bytes);
+                                        });
+                                      },
+                                      onDoneButtonStyle:
+                                          widget.onDoneButtonStyle,
+                                      editorBackgroundColor:
+                                          widget.editorBackgroundColor,
+                                    ),
+                                  ),
                               ],
                             ),
                           ),
-
-                          /// bottom tools
-                          if (!kIsWeb &&
-                              MediaQuery.of(context).viewInsets.bottom == 0)
-                            BottomTools(
-                              contentKey: contentKey,
-                              onDone: (bytes) {
-                                setState(() {
-                                  widget.onDone!(bytes);
-                                });
-                              },
-                              onDoneButtonStyle: widget.onDoneButtonStyle,
-                              editorBackgroundColor:
-                                  widget.editorBackgroundColor,
-                            ),
                         ],
                       ),
                       gallery: GalleryMediaPicker(
