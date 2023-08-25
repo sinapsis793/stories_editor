@@ -107,7 +107,15 @@ class _StoriesEditorState extends State<StoriesEditor> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent, //i like transaparent :-)
+        systemNavigationBarColor:
+            Theme.of(context).bottomAppBarTheme.color ?? Colors.grey[100],
+        statusBarIconBrightness: Brightness.dark, // status bar icons' color
+        systemNavigationBarIconBrightness: Brightness.dark,
+      ),
+      child:  Container(
       color: Colors.blue,
       child: NotificationListener<OverscrollIndicatorNotification>(
         onNotification: (overscroll) {
@@ -150,6 +158,7 @@ class _StoriesEditorState extends State<StoriesEditor> {
             ),
           ),
         ),
+      ),
       ),
     );
   }
