@@ -21,7 +21,7 @@ dependencies:
   #  git:
   #    url: https://github.com/bluefireteam/photo_view
   #    ref: 8156907eecfa812b181a5a729d790f6d399f311b
-  image_gallery_saver: ^2.0.3
+  image_gallery_saver_plus: "^3.0.5"
   #own packages
   gallery_media_picker: ^0.1.0
 

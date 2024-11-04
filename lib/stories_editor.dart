@@ -88,7 +88,6 @@ class StoriesEditor extends StatefulWidget {
 class _StoriesEditorState extends State<StoriesEditor> {
   @override
   void initState() {
-    Paint.enableDithering = true;
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
@@ -115,50 +114,51 @@ class _StoriesEditorState extends State<StoriesEditor> {
         statusBarIconBrightness: Brightness.dark, // status bar icons' color
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
-      child:  Container(
-      color: Colors.blue,
-      child: NotificationListener<OverscrollIndicatorNotification>(
-        onNotification: (overscroll) {
-          overscroll.disallowIndicator();
-          return false;
-        },
-        child: ScreenUtilInit(
-          designSize: Size(MediaQuery.of(context).size.width * 3,
-              MediaQuery.of(context).size.height * 2),
-          builder: (_, __) => MultiProvider(
-            providers: [
-              ChangeNotifierProvider(create: (_) => ControlNotifier()),
-              ChangeNotifierProvider(create: (_) => ScrollNotifier()),
-              ChangeNotifierProvider(create: (_) => DraggableWidgetNotifier()),
-              ChangeNotifierProvider(create: (_) => GradientNotifier()),
-              ChangeNotifierProvider(create: (_) => PaintingNotifier()),
-              ChangeNotifierProvider(create: (_) => TextEditingNotifier()),
-            ],
-            child: MainView(
-              shareButtonText: widget.shareButtonText,
-              giphyKey: widget.giphyKey,
-              okButtonFortText: widget.okButtonFortText,
-              tapToTypeText: widget.tapToTypeText,
-              onDone: widget.onDone,
-              fontFamilyList: widget.fontFamilyList,
-              isCustomFontList: widget.isCustomFontList,
-              middleBottomWidget: widget.middleBottomWidget,
-              gradientColors: widget.gradientColors,
-              colorList: widget.colorList,
-              loaderWidget: widget.loaderWidget,
-              imagePathFromWidget: widget.imagePathFromWidget,
-              onDoneButtonStyle: widget.onDoneButtonStyle,
-              onBackPress: widget.onBackPress,
-              editorBackgroundColor: widget.editorBackgroundColor,
-              galleryThumbnailQuality: widget.galleryThumbnailQuality,
-              cancelButtonText: widget.cancelButtonText,
-              descripton: widget.descripton,
-              okButtonText: widget.okButtonText,
-              title: widget.title,
+      child: Container(
+        color: Colors.blue,
+        child: NotificationListener<OverscrollIndicatorNotification>(
+          onNotification: (overscroll) {
+            overscroll.disallowIndicator();
+            return false;
+          },
+          child: ScreenUtilInit(
+            designSize: Size(MediaQuery.of(context).size.width * 3,
+                MediaQuery.of(context).size.height * 2),
+            builder: (_, __) => MultiProvider(
+              providers: [
+                ChangeNotifierProvider(create: (_) => ControlNotifier()),
+                ChangeNotifierProvider(create: (_) => ScrollNotifier()),
+                ChangeNotifierProvider(
+                    create: (_) => DraggableWidgetNotifier()),
+                ChangeNotifierProvider(create: (_) => GradientNotifier()),
+                ChangeNotifierProvider(create: (_) => PaintingNotifier()),
+                ChangeNotifierProvider(create: (_) => TextEditingNotifier()),
+              ],
+              child: MainView(
+                shareButtonText: widget.shareButtonText,
+                giphyKey: widget.giphyKey,
+                okButtonFortText: widget.okButtonFortText,
+                tapToTypeText: widget.tapToTypeText,
+                onDone: widget.onDone,
+                fontFamilyList: widget.fontFamilyList,
+                isCustomFontList: widget.isCustomFontList,
+                middleBottomWidget: widget.middleBottomWidget,
+                gradientColors: widget.gradientColors,
+                colorList: widget.colorList,
+                loaderWidget: widget.loaderWidget,
+                imagePathFromWidget: widget.imagePathFromWidget,
+                onDoneButtonStyle: widget.onDoneButtonStyle,
+                onBackPress: widget.onBackPress,
+                editorBackgroundColor: widget.editorBackgroundColor,
+                galleryThumbnailQuality: widget.galleryThumbnailQuality,
+                cancelButtonText: widget.cancelButtonText,
+                descripton: widget.descripton,
+                okButtonText: widget.okButtonText,
+                title: widget.title,
+              ),
             ),
           ),
         ),
-      ),
       ),
     );
   }
